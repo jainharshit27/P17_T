@@ -17,7 +17,6 @@ class Ghost:
         self.rect.x-=20
     
     def display(self):
-        #pygame.draw.rect(screen,(250,150,50),self.rect)
         screen.blit(images["ghost"],self.rect) 
         
 class Door:
@@ -30,7 +29,6 @@ class Door:
         
     def display(self):  
         screen.blit(images["door"],self.rect1)
-        #pygame.draw.rect(screen,(250,150,50),self.rect2)
     
     def move(self):
         self.rect1.y+=self.speed
@@ -67,10 +65,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             pygame.quit()
-            sys.exit() 
-        '''
-        Create event based movement for ghost using the methods in class Ghost above
-        '''
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                ghost.jump()
+            # Create event based movement for ghost similar one created above in order to use the methods in class Ghost declared above.
         
     if state=="play":          
         groundy=groundy+3 
@@ -78,9 +77,10 @@ while True:
             groundy=-125                  
         ghost.gravity() 
         
-        '''
-        use move and display on d1 and d2
-        '''
+        d1.move()
+        d1.display()
+        
+        # use move and display on d2 object
         
         ghost.display()
         
